@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+  labels:
+    app: mywebserver-service
+spec:
+  ports:
+  - port: 80
+  selector:
+    env: ws
+  type: LoadBalancer
