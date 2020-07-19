@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpd
+  labels:
+    type: webserver
+spec:
+  selector:
+    matchLabels:
+      env: ws
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        env: ws
+    spec:
+      containers:
+      - image: httpd
+        name: httpd
+        volumeMounts:
+        - name: pvc
+          mountPath: /usr/local/apache2/htdocs/
+      volumes:
+      - name: pvc
+        persistentVolumeClaim:
+          claimName: mypvc
